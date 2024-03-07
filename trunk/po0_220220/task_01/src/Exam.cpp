@@ -9,7 +9,7 @@ Exam::Exam(const Exam &other)
 	this->studentName = new char[strnlen(other.studentName, STR_MAX_SIZE) + 1];
 	strcpy_s(this->studentName, strnlen(other.studentName, STR_MAX_SIZE) + 1, other.studentName);
 
-	std::cout << "Вызван конструктор копирования " << this << std::endl;
+	std::cout << "The copy constructor is called " << this << std::endl;
 }
 
 void Exam::SetName(const char *name)
@@ -35,7 +35,7 @@ void Exam::Set(const char *name, const int date, const int grade)
 
 Exam::Exam(const char *name, const int date, const int grade)
 {
-	std::cout << "Вызван конструктор с параметрами " << this << std::endl;
+	std::cout << "The constructor with parameters is called " << this << std::endl;
 
 	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
 	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
@@ -47,19 +47,19 @@ Exam::Exam(const char *name, const int date, const int grade)
 Exam::Exam()
 	: studentName(nullptr), date(1), grade(0)
 {
-	std::cout << "Вызван конструктор без параметров " << this << std::endl;
+	std::cout << "A constructor without parameters is called " << this << std::endl;
 }
 
 Exam::~Exam()
 {
-	std::cout << "Вызван деструктор " << this << std::endl;
+	std::cout << "Destructor called " << this << std::endl;
 	delete[] studentName;
 }
 
 void Exam::Print()
 {
-	std::cout << "Имя студента: " << studentName << std::endl;
-	std::cout << "День экзамена: " << date << std::endl;
-	std::cout << "Оценка: " << grade << std::endl;
+	std::cout << "Student name: " << studentName << std::endl;
+	std::cout << "Exam day: " << date << std::endl;
+	std::cout << "Grade: " << grade << std::endl;
 	std::cout << std::endl;
 }
