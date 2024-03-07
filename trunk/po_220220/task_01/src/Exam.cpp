@@ -6,8 +6,8 @@ Exam::Exam(const Exam &other)
 
 	this->grade = other.grade;
 
-	this->studentName = new char[strlen(other.studentName) + 1];
-	strcpy_s(this->studentName, strlen(other.studentName) + 1, other.studentName);
+	this->studentName = new char[strnlen(other.studentName, STR_MAX_SIZE) + 1];
+	strcpy_s(this->studentName, strnlen(other.studentName, STR_MAX_SIZE) + 1, other.studentName);
 
 	std::cout << "Вызван конструктор копирования " << this << std::endl;
 }
@@ -17,8 +17,8 @@ void Exam::SetName(const char *name)
 	if (studentName != nullptr)
 		delete[] this->studentName;
 
-	this->studentName = new char[strlen(name) + 1];
-	strcpy_s(this->studentName, strlen(name) + 1, name);
+	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
+	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
 }
 
 void Exam::Set(const char *name, const int date, const int grade)
@@ -29,16 +29,16 @@ void Exam::Set(const char *name, const int date, const int grade)
 	if (studentName != nullptr)
 		delete[] this->studentName;
 
-	this->studentName = new char[strlen(name) + 1];
-	strcpy_s(this->studentName, strlen(name) + 1, name);
+	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
+	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
 }
 
 Exam::Exam(const char *name, const int date, const int grade)
 {
 	std::cout << "Вызван конструктор с параметрами " << this << std::endl;
 
-	this->studentName = new char[strlen(name) + 1];
-	strcpy_s(this->studentName, strlen(name) + 1, name);
+	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
+	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
 
 	this->date = date;
 	this->grade = grade;
