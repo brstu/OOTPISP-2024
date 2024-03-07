@@ -7,7 +7,7 @@ Exam::Exam(const Exam &other)
 	this->grade = other.grade;
 
 	this->studentName = new char[strnlen(other.studentName, STR_MAX_SIZE) + 1];
-	strcpy_s(this->studentName, strnlen(other.studentName, STR_MAX_SIZE) + 1, other.studentName);
+	strcpy(this->studentName, other.studentName);
 
 	std::cout << "The copy constructor is called " << this << std::endl;
 }
@@ -18,7 +18,7 @@ void Exam::SetName(const char *name)
 		delete[] this->studentName;
 
 	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
+	strcpy(this->studentName, name);
 }
 
 void Exam::Set(const char *name, const int date, const int grade)
@@ -30,7 +30,7 @@ void Exam::Set(const char *name, const int date, const int grade)
 		delete[] this->studentName;
 
 	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
+	strcpy(this->studentName, name);
 }
 
 Exam::Exam(const char *name, const int date, const int grade)
@@ -38,7 +38,7 @@ Exam::Exam(const char *name, const int date, const int grade)
 	std::cout << "The constructor with parameters is called " << this << std::endl;
 
 	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strcpy_s(this->studentName, strnlen(name, STR_MAX_SIZE) + 1, name);
+	strcpy(this->studentName, name);
 
 	this->date = date;
 	this->grade = grade;
