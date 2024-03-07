@@ -2,7 +2,7 @@
 #define EXAM_H
 
 #include <iostream>
-#include <string>
+#include <string.h>
 
 constexpr static auto STR_MAX_SIZE = 100;
 
