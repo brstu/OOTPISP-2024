@@ -13,38 +13,27 @@
 ### Блоки с кодом реализации конструкторов и деструктора ###
 ```c++
 Exam::Exam(const Exam &other)
+	: _date(other._date), _grade(other._grade)
 {
-	this->date = other.date;
+	_studentName = std::make_unique<std::string>(*other._studentName);
 
-	this->grade = other.grade;
-
-	this->studentName = new char[strlen(other.studentName) + 1];
-	strcpy_s(this->studentName, strlen(other.studentName) + 1, other.studentName);
-
-	std::cout << "Вызван конструктор копирования " << this << std::endl;
+	std::cout << "The copy constructor is called " << this << std::endl;
 }
 
 Exam::Exam(const char *name, const int date, const int grade)
+	: _studentName(std::make_unique<std::string>(name)), _date(date), _grade(grade)
 {
-	std::cout << "Вызван конструктор с параметрами " << this << std::endl;
-
-	this->studentName = new char[strlen(name) + 1];
-	strcpy_s(this->studentName, strlen(name) + 1, name);
-
-	this->date = date;
-	this->grade = grade;
+	std::cout << "The constructor with parameters is called " << this << std::endl;
 }
 
 Exam::Exam()
-	: studentName(nullptr), date(1), grade(0)
 {
-	std::cout << "Вызван конструктор без параметров " << this << std::endl;
+	std::cout << "A constructor without parameters is called " << this << std::endl;
 }
 
 Exam::~Exam()
 {
-	std::cout << "Вызван деструктор " << this << std::endl;
-	delete[] studentName;
+	std::cout << "Destructor called " << this << std::endl;
 }
 ```
 
@@ -53,7 +42,7 @@ Exam::~Exam()
 #### Указатель на объект ####
 
 ```c++
-Exam *ptr = c;
+auto ptr = c;
 ptr->Print();
 ```
 
@@ -62,13 +51,12 @@ ptr->Print();
 #### Указатель на функцию ####
 
 ```c++
-void (Exam::*pf)();
-pf = &Exam::Print;
+void (Exam::*pf)() const = &Exam::Print;
 
-Exam firstGroup[3] = {
-        Exam("Виктор", 1, 10),
-        Exam("Виталий", 1, 10),
-        Exam("Дмитрий", 1, 10)};
+std::array<Exam, 3> firstGroup = {
+    Exam("Victor", 1, 10),
+    Exam("Vitaliy", 1, 10),
+    Exam("Dima", 1, 10)};
 
 for (int i = 0; i < 3; i++)
 {

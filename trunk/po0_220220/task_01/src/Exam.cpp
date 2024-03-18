@@ -1,51 +1,40 @@
 #include "Exam.h"
 
 Exam::Exam(const Exam &other)
+	: _date(other._date), _grade(other._grade)
 {
-	this->date = other.date;
-
-	this->grade = other.grade;
-
-	this->studentName = new char[strnlen(other.studentName, STR_MAX_SIZE) + 1];
-	strncpy(this->studentName, other.studentName, strnlen(other.studentName, STR_MAX_SIZE) + 1);
+	_studentName = std::make_unique<std::string>(*other._studentName);
 
 	std::cout << "The copy constructor is called " << this << std::endl;
 }
 
+Exam &Exam::operator=(const Exam &rhs)
+{
+	this->_studentName = std::make_unique<std::string>(*rhs._studentName);
+	this->_date = rhs._date;
+	this->_grade = rhs._grade;
+	return *this;
+}
+
 void Exam::SetName(const char *name)
 {
-	if (studentName != nullptr)
-		delete[] this->studentName;
-
-	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strncpy(this->studentName, name, strnlen(name, STR_MAX_SIZE) + 1);
+	_studentName = std::make_unique<std::string>(name);
 }
 
 void Exam::Set(const char *name, const int date, const int grade)
 {
-	this->date = date;
-	this->grade = grade;
-
-	if (studentName != nullptr)
-		delete[] this->studentName;
-
-	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strncpy(this->studentName, name, strnlen(name, STR_MAX_SIZE) + 1);
+	this->_date = date;
+	this->_grade = grade;
+	_studentName = std::make_unique<std::string>(name);
 }
 
 Exam::Exam(const char *name, const int date, const int grade)
+	: _studentName(std::make_unique<std::string>(name)), _date(date), _grade(grade)
 {
 	std::cout << "The constructor with parameters is called " << this << std::endl;
-
-	this->studentName = new char[strnlen(name, STR_MAX_SIZE) + 1];
-	strncpy(this->studentName, name, strnlen(name, STR_MAX_SIZE) + 1);
-
-	this->date = date;
-	this->grade = grade;
 }
 
 Exam::Exam()
-	: studentName(nullptr), date(1), grade(0)
 {
 	std::cout << "A constructor without parameters is called " << this << std::endl;
 }
@@ -53,13 +42,12 @@ Exam::Exam()
 Exam::~Exam()
 {
 	std::cout << "Destructor called " << this << std::endl;
-	delete[] studentName;
 }
 
-void Exam::Print()
+void Exam::Print() const
 {
-	std::cout << "Student name: " << studentName << std::endl;
-	std::cout << "Exam day: " << date << std::endl;
-	std::cout << "Grade: " << grade << std::endl;
+	std::cout << "Student name: " << _studentName << std::endl;
+	std::cout << "Exam day: " << _date << std::endl;
+	std::cout << "Grade: " << _grade << std::endl;
 	std::cout << std::endl;
 }

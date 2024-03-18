@@ -1,16 +1,17 @@
 
-
+#include <memory>
+#include <vector>
+#include <array>
 #include "Exam.h"
 
 int main()
 {
 
-
-    Exam *a = new Exam("Petr", 1, 4);
+    auto a = std::make_unique<Exam>("Petr", 1, 4);
     Exam b;
-    Exam *c = new Exam(*a);
+    auto c = std::make_shared<Exam>(*a);
 
-    Exam *ptr = c;
+    auto ptr = c;
     ptr->Print();
 
     b.SetDate(12);
@@ -23,10 +24,9 @@ int main()
 
     a->Print();
 
-    void (Exam::*pf)();
-    pf = &Exam::Print;
+    void (Exam::*pf)() const = &Exam::Print;
 
-    Exam firstGroup[3] = {
+    std::array<Exam, 3> firstGroup = {
         Exam("Victor", 1, 10),
         Exam("Vitaliy", 1, 10),
         Exam("Dima", 1, 10)};
@@ -36,7 +36,7 @@ int main()
         (firstGroup[i].*pf)();
     }
 
-    Exam *secondGroup = new Exam[3];
+    auto secondGroup = std::make_unique<Exam[]>(3);
     secondGroup[0].Set("Roman", 3, 4);
     secondGroup[1].Set("Axmet", 3, 5);
     secondGroup[2].Set("Fiodociy", 3, 6);
@@ -45,10 +45,4 @@ int main()
     {
         (secondGroup[i].*pf)();
     }
-
-    delete[] secondGroup;
-
-    
-    delete a;
-    delete c; 
 }
