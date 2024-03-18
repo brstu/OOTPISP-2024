@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 constexpr static auto STR_MAX_SIZE = 100;
 
