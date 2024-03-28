@@ -12,7 +12,7 @@ Staff::Staff()
 }
 
 Staff::Staff(const Staff &other)
-    : _workshopNumber(other._workshopNumber), _category(other._category), _workerName(std::make_unique<std::string>(*other._workerName))
+    : _workerName(std::make_unique<std::string>(*other._workerName)), _workshopNumber(other._workshopNumber), _category(other._category)
 {
     std::cout << "The copy constructor is called:  " << this << std::endl;
 }
