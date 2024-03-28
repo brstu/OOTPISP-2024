@@ -12,14 +12,6 @@
 
 ### Блоки с кодом реализации конструкторов и деструктора ###
 ```c++
-Exam::Exam(const Exam &other)
-	: _date(other._date), _grade(other._grade)
-{
-	_studentName = std::make_unique<std::string>(*other._studentName);
-
-	std::cout << "The copy constructor is called " << this << std::endl;
-}
-
 Exam::Exam(const char *name, const int date, const int grade)
 	: _studentName(std::make_unique<std::string>(name)), _date(date), _grade(grade)
 {
@@ -31,10 +23,6 @@ Exam::Exam()
 	std::cout << "A constructor without parameters is called " << this << std::endl;
 }
 
-Exam::~Exam()
-{
-	std::cout << "Destructor called " << this << std::endl;
-}
 ```
 
 ### Фрагмент программы, показывающий использование указателя на объект и указателя на функцию ###
@@ -42,11 +30,10 @@ Exam::~Exam()
 #### Указатель на объект ####
 
 ```c++
-auto ptr = c;
-ptr->Print();
+a->Print();
 ```
 
-#### В переменную ptr записывается адрес переменной с. Затем вызывается метод Print класса Exam. Метод выведет в консоль поля объекта с. ####
+#### В переменной а содержится адрес объекта. Затем вызывается метод Print класса Exam. Метод выведет в консоль поля объекта а. ####
 
 #### Указатель на функцию ####
 

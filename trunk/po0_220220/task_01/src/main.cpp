@@ -9,10 +9,8 @@ int main()
 
     auto a = std::make_unique<Exam>("Petr", 1, 4);
     Exam b;
-    auto c = std::make_shared<Exam>(*a);
 
-    auto ptr = c;
-    ptr->Print();
+    a->Print();
 
     b.SetDate(12);
     b.SetGrade(10);

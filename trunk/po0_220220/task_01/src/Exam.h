@@ -12,8 +12,6 @@ class Exam
 public:
 	Exam();													 // Конструктор по умолчанию
 	Exam(const char *name, const int date, const int grade); // Конструктор с параметрами
-	Exam(const Exam &other);								 // Конструктор копирования
-	Exam &operator=(const Exam &rhs);
 
 	// Геттеры
 	std::string GetName() const { return *_studentName; };
@@ -27,9 +25,6 @@ public:
 	void Set(const char *name, int date, const int grade);
 
 	void Print() const;
-
-	// Деструктор
-	~Exam();
 
 private:
 	std::unique_ptr<std::string> _studentName;

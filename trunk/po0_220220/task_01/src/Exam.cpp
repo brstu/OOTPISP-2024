@@ -1,21 +1,5 @@
 #include "Exam.h"
 
-Exam::Exam(const Exam &other)
-	: _date(other._date), _grade(other._grade)
-{
-	_studentName = std::make_unique<std::string>(*other._studentName);
-
-	std::cout << "The copy constructor is called " << this << std::endl;
-}
-
-Exam &Exam::operator=(const Exam &rhs)
-{
-	this->_studentName = std::make_unique<std::string>(*rhs._studentName);
-	this->_date = rhs._date;
-	this->_grade = rhs._grade;
-	return *this;
-}
-
 void Exam::SetName(const char *name)
 {
 	_studentName = std::make_unique<std::string>(name);
@@ -37,11 +21,6 @@ Exam::Exam(const char *name, const int date, const int grade)
 Exam::Exam()
 {
 	std::cout << "A constructor without parameters is called " << this << std::endl;
-}
-
-Exam::~Exam()
-{
-	std::cout << "Destructor called " << this << std::endl;
 }
 
 void Exam::Print() const
